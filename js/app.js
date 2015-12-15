@@ -63,7 +63,6 @@ var productRank = {
     }else {
         this.resultsEl.hidden = true;
       }
-
     }
   };
 
