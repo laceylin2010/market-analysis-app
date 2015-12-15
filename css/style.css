@@ -1,8 +1,13 @@
 img {
-  position: relative;
-  width:  400px;
-  height: 400px
+  width:  20em;
+  height: 20em;
+
 }
 h1 {
   text-align: center;
+}
+
+#wrapper {
+  width: auto;
+  margin-left: 16em;
 }
