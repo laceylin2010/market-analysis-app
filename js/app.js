@@ -19,7 +19,6 @@ function Product (imageName, filePath) {
 
 })();
 
-
 var productRank = {
   leftObj: null,
   middleObj: null,
@@ -87,15 +86,19 @@ productRank.leftEl.addEventListener('click', productRank.displayImages);
 productRank.middleEl.addEventListener('click', productRank.displayImages);
 productRank.rightEl.addEventListener('click', productRank.displayImages);
 
-
-
 resultsEl.addEventListener('click', function(event){
   var catalogVotesEl = document.getElementById('votes');
   var tbEl = document.createElement('table');
+
   for(var i=0; i<allProducts.length; i++){
   var trEl = document.createElement('tr');
   var tdEl = document.createElement('td');
-  tdEl.textContent= allProducts[i];
+  tdEl.textContent= allProducts[i].imageName;
+  trEl.appendChild(tdEl);
+  tbEl.appendChild(trEl);
+  catalogVotesEl.appendChild(tbEl);
+  var tdEl = document.createElement('td');
+  tdEl.textContent = allProducts[i].tally;
   trEl.appendChild(tdEl);
   tbEl.appendChild(trEl);
   catalogVotesEl.appendChild(tbEl);
@@ -103,19 +106,6 @@ resultsEl.addEventListener('click', function(event){
     }
   }
 );
-
-
-//   thEl.textContent = 'Name of Image';
-//   trEl.appendChild(thEl);
-//   totalEl.textContent = 'Total';
-//   trEl.appendChild(totalEl);
-//   for(var i = 0; i<productName.length; i++){
-//     var tvCurrent = document.createElement('tv');
-//     tvCurrent.textContent = productName[i];
-//     trEl.appendChild(tvCurrent);
-//   };
-//   tbEl.appendChild(trEl);
-//   catalogVotesEl.appendChild(tbEl);
 
 productRank.displayImages();
 productRank.showResults();
