@@ -17,13 +17,11 @@ h1 {
 }
 
 #wrapper {
-  width: 100%;
+  width: 75%;
   margin: auto;
 
 }
 
-p {
+h3 {
   font-family: 'Architects Daughter', cursive;
-  display: flex;
-  justify-content: center;
 }
