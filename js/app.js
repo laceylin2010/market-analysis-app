@@ -1,8 +1,11 @@
 var allProducts=[];
 var productName = ['bag','banana','boots','chair','cthulhu','dragon','pen','scissors','shark','sweep','unicorn','usb','water_can','wine_glass'];
 
+
 var data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+  // labels and datasets are two properties in the data object
+  // datasets is only one object with one index. the index being 0. and inside are objects inside the index
+    labels: [],
     datasets: [
         {
             label: "My First dataset",
@@ -11,9 +14,13 @@ var data = {
             highlightFill: "rgba(220,220,220,0.75)",
             highlightStroke: "rgba(220,220,220,1)",
             data: []
+
         },
     ]
 };
+
+
+/*functional Javascript*/
 
 var resultsEl = document.getElementById('results');
 
@@ -23,7 +30,9 @@ function Product (imageName, filePath) {
   this.tally = 0;
   this.views = 0;
   allProducts.push(this);
-  // data.labels.push(imageName);
+  data.labels.push(imageName);
+  data.datasets[0].data.push(0);
+
 }
 
 (function buildAlbum() {
@@ -38,7 +47,7 @@ var productRank = {
   leftObj: null,
   middleObj: null,
   rightObj: null,
-  // barChart: null;
+
 
 
   resultsEl: document.getElementById('results'),
@@ -68,6 +77,18 @@ var productRank = {
     productRank.rightEl.id = productRank.rightObj.imageName;
 
   },
+
+  tallyClicks: function(elId) {
+    for(var i in allProducts){
+      if(allProducts[i].imageName === elId) {
+        allProducts[i].tally +=1;
+        this.totalClicks +=1;
+        console.log(allProducts[i].imageName + ' has ' + allProducts[i].tally);
+        data.datasets[0].data[i] = allProducts[i].tally;
+      }
+    }
+  },
+
   showResults: function(){
     if (this.totalClicks % 15 === 0) {
       this.resultsEl.hidden = false;
@@ -79,25 +100,19 @@ var productRank = {
 
 
 productRank.leftEl.addEventListener('click', function(){
-  productRank.totalClicks +=1;
-  productRank.leftObj.tally += 1;
-  console.log(productRank.leftObj.imageName + ' has ' + productRank.leftObj.tally);
+  productRank.tallyClicks(productRank.leftEl.id);
   productRank.displayImages();
   productRank.showResults();
 });
 
 productRank.middleEl.addEventListener('click', function(){
-  productRank.totalClicks +=1;
-  productRank.middleObj.tally += 1;
-  console.log(productRank.middleObj.imageName + ' has ' + productRank.middleObj.tally);
+  productRank.tallyClicks(productRank.middleEl.id);
   productRank.displayImages();
   productRank.showResults();
 });
 
 productRank.rightEl.addEventListener('click', function(){
-  productRank.totalClicks +=1;
-  productRank.rightObj.tally += 1;
-  console.log(productRank.rightObj.imageName + ' has ' + productRank.rightObj.tally);
+  productRank.tallyClicks(productRank.rightEl.id);
   productRank.displayImages();
   productRank.showResults();
 });
@@ -123,8 +138,12 @@ productRank.rightEl.addEventListener('click', productRank.displayImages);
   tbEl.appendChild(trEl);
   catalogVotesEl.appendChild(tbEl);
 
-};
+  var context = document.getElementById('popularity').getContext('2d');
+  var barChart= new Chart(context).Bar(data);
+}
   };
+
+
 
 productRank.displayImages();
 productRank.resultsEl.addEventListener('click', function(){
