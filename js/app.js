@@ -10,11 +10,12 @@ var data = {
     datasets: [
         {
             label: "My First dataset",
-            fillColor: '#3D93FF',
-            strokeColor: "rgba(220,220,220,0.8)",
+            fillColor: '#2E2A26',
+            strokeColor: "black",
             highlightFill: "rgba(220,220,220,0.75)",
             highlightStroke: "rgba(220,220,220,1)",
-            data: []
+            data: [],
+
 
         },
     ]
@@ -96,10 +97,6 @@ var productRank = {
   showResults: function(){
     if (this.totalClicks % 15 === 0) {
       this.resultsEl.hidden = false;
-        productRank.leftEl.removeEventListener('click', false);
-        productRank.middleEl.removeEventListener('click', false);
-        productRank.rightEl.removeEventListener('click', false);
-
     }else {
         this.resultsEl.hidden = true;
       }
@@ -159,6 +156,7 @@ productRank.rightEl.addEventListener('click', productRank.displayImages);
 
 productRank.displayImages();
 productRank.resultsEl.addEventListener('click', function(){
+// productRank.resultsEl.addEventListener('click'productRank.onClick);
 refresh.hidden=false;
 
 voteTable();
