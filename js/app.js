@@ -96,6 +96,9 @@ var productRank = {
   showResults: function(){
     if (this.totalClicks % 15 === 0) {
       this.resultsEl.hidden = false;
+        productRank.leftEl.removeEventListener('click', false);
+        productRank.middleEl.removeEventListener('click', false);
+        productRank.rightEl.removeEventListener('click', false);
 
     }else {
         this.resultsEl.hidden = true;
