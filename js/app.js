@@ -1,6 +1,20 @@
 var allProducts=[];
 var productName = ['bag','banana','boots','chair','cthulhu','dragon','pen','scissors','shark','sweep','unicorn','usb','water_can','wine_glass'];
 
+var data = {
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [
+        {
+            label: "My First dataset",
+            fillColor: "rgba(220,220,220,0.5)",
+            strokeColor: "rgba(220,220,220,0.8)",
+            highlightFill: "rgba(220,220,220,0.75)",
+            highlightStroke: "rgba(220,220,220,1)",
+            data: []
+        },
+    ]
+};
+
 var resultsEl = document.getElementById('results');
 
 function Product (imageName, filePath) {
@@ -9,6 +23,7 @@ function Product (imageName, filePath) {
   this.tally = 0;
   this.views = 0;
   allProducts.push(this);
+  // data.labels.push(imageName);
 }
 
 (function buildAlbum() {
@@ -19,10 +34,11 @@ function Product (imageName, filePath) {
 })();
 
 var productRank = {
+  totalClicks: 0,
   leftObj: null,
   middleObj: null,
   rightObj: null,
-  totalClicks: 0,
+  // barChart: null;
 
 
   resultsEl: document.getElementById('results'),
@@ -53,13 +69,8 @@ var productRank = {
 
   },
   showResults: function(){
-    console.log("productRank.totalClicks is: " + productRank.totalClicks);
-    console.log("productRank.resultsEl.hidden" + productRank.resultsEl.hidden);
-
     if (this.totalClicks % 15 === 0) {
       this.resultsEl.hidden = false;
-
-      console.log("productRank.resultsEl.hidden" + productRank.resultsEl.hidden);
     }else {
         this.resultsEl.hidden = true;
       }
@@ -111,6 +122,7 @@ productRank.rightEl.addEventListener('click', productRank.displayImages);
   trEl.appendChild(tdEl);
   tbEl.appendChild(trEl);
   catalogVotesEl.appendChild(tbEl);
+
 };
   };
 
