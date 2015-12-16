@@ -5,28 +5,34 @@
     <title></title>
     <link rel='stylesheet' href="css/style.css" type='text/css'>
     <link rel='stylesheet' href='css/skeleton.css' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <script src='js/chart.js'></script>
 
     </head>
   <body>
-    <h1>Click the picture you want to vote on!</h1>
+    <div id='wrapper'>
+    <div class='row'>
+      <h1>Click the picture you want to vote on!</h1>
+    <div class='container'>
+    <div class='four columns'><img src='' id='img1' alt=''></div>
+    <div class='four columns'><img src='' id='img2' alt=''></div>
+    <div class='four columns'><img src='' id='img3' alt=''></div>
+    </div>
 
-    <div>
-    <img src='' id='img1' class='three columns' alt=''>
-    <img src='' id='img2'lass='three columns' alt=''>
-    <img src='' id='img3' class='three columns' alt=''>
-  </div>
-  
-    <section id=votes></section>
+
+    <p>Click the images you would like to vote on 15 times!</p>
 
   <button type='click' name= 'button' id='results' hidden>See Totals</button>
+  <button type='click' name= 'button' id='refresh' hidden>Go Again</button>
+  <section id=votes></section>
+
+  <canvas id='popularity' width='950' height='300'></canvas>
 
 
-  <!-- <form id=userVotes>
-    <fieldset>
-      <legend>Voting Results</legend>
-    </fieldset>
-  </form> -->
+
 
   <script src='js/app.js'></script>
+  </div>
+  </div>
   </body>
 </html>
