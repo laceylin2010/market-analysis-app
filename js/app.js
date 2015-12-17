@@ -89,12 +89,12 @@ var productRank = {
         data.datasets[0].data[i] = allProducts[i].tally;
       }
     }
-    for(var i = 0; i<allProducts.length; i++)
-      if(allProducts[i] === undefined){
-        allProducts[i] = 0;
-        console.log(allProducts[i]);
-      }
     localStorage.setItem("allItems", JSON.stringify(allProducts));
+    // for(var i = 0; i<allProducts.length; i++)
+    //   if(allProducts[i] === undefined){
+    //     allProducts[i] = 0;
+    //     console.log(allProducts[i]);
+    //   }
 
   },
 
