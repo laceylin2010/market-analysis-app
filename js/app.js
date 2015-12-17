@@ -20,8 +20,6 @@ var data = {
         },
     ]
 };
-
-
 /*functional Javascript*/
 
 var resultsEl = document.getElementById('results');
@@ -35,15 +33,14 @@ function Product (imageName, filePath) {
   allProducts.push(this);
   data.labels.push(imageName);
   data.datasets[0].data.push(0);
-
 }
 
-(function buildAlbum() {
+function buildAlbum() {
   for (var i = 0; i<productName.length; i++){
     new Product(productName[i], 'imgs/' + productName[i] + '.jpg');
   }
+}
 
-})();
 
 var productRank = {
   totalClicks: 0,
@@ -92,11 +89,22 @@ var productRank = {
         data.datasets[0].data[i] = allProducts[i].tally;
       }
     }
+    for(var i = 0; i<allProducts.length; i++)
+      if(allProducts[i] === undefined){
+        allProducts[i] = 0;
+        console.log(allProducts[i]);
+      }
+    localStorage.setItem("allItems", JSON.stringify(allProducts));
+
   },
+
+    // localstorage exists, retrieve all info from local storage. if it doesnt exist, then use the function to build album array. calling building album is gonna be in the else statement.
+
 
   showResults: function(){
     if (this.totalClicks % 15 === 0) {
       this.resultsEl.hidden = false;
+      console.log('make my chart!')
     }else {
         this.resultsEl.hidden = true;
       }
@@ -130,38 +138,25 @@ productRank.leftEl.addEventListener('click', productRank.displayImages);
 productRank.middleEl.addEventListener('click', productRank.displayImages);
 productRank.rightEl.addEventListener('click', productRank.displayImages);
 
-  function voteTable(){
+function voteTable(){
   var catalogVotesEl = document.getElementById('votes');
-  var tbEl = document.createElement('table');
-
-  //   for(var i=0; i<allProducts.length; i++){
-  // var trEl = document.createElement('tr');
-  // var tdEl = document.createElement('td');
-  // tdEl.textContent= allProducts[i].imageName;
-  // trEl.appendChild(tdEl);
-  // tbEl.appendChild(trEl);
-  // catalogVotesEl.appendChild(tbEl);
-  // var tdEl = document.createElement('td');
-  // tdEl.textContent = allProducts[i].tally;
-  // trEl.appendChild(tdEl);
-  // tbEl.appendChild(trEl);
-  // catalogVotesEl.appendChild(tbEl);
-
   var context = document.getElementById('popularity').getContext('2d');
   var barChart= new Chart(context).Bar(data);
+
 }
-  // };
 
+if(localStorage.getItem('allItems') !==  null){
+  console.log('local Storage Exists')
 
+    allProducts = JSON.parse(localStorage.getItem("allItems"));
+  } else {
+    console.log('local Storage does not exist!')
+    buildAlbum();
+  };
 
 productRank.displayImages();
 productRank.resultsEl.addEventListener('click', function(){
 // productRank.resultsEl.addEventListener('click'productRank.onClick);
-refresh.hidden=false;
 
 voteTable();
 });
-
-refresh.addEventListener('click', function(){
-  window.location.reload()
-})
