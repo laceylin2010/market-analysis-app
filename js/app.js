@@ -1,4 +1,5 @@
 var allProducts=[];
+var data;
 var productName = ['bag','banana','boots','chair','cthulhu','dragon','pen','scissors','shark','sweep','unicorn','usb','water_can','wine_glass'];
 function Product (imageName, filePath) {
   this.imageName = imageName;
@@ -14,7 +15,7 @@ function buildAlbum() {
     new Product(productName[i], 'imgs/' + productName[i] + '.jpg');
   }
   localStorage.setItem('allProducts', JSON.stringify(allProducts));
-};
+}
 var resultsEl = document.getElementById('results');
 
 var productRank = {
@@ -54,37 +55,37 @@ var productRank = {
         data.datasets[0].data[i] = allProducts[i].tally;
       }
     }
-    localStorage.setItem("allProducts", JSON.stringify(allProducts));
-    localStorage.setItem("data", JSON.stringify(data));
+    localStorage.setItem('allProducts', JSON.stringify(allProducts));
+    localStorage.setItem('data', JSON.stringify(data));
   },
 
   showResults: function(){
     if (this.totalClicks % 15 === 0) {
       this.resultsEl.hidden = false;
     }else {
-        this.resultsEl.hidden = true;
-      }
+      this.resultsEl.hidden = true;
     }
+  }
+};
+if(localStorage.data && localStorage.allProducts){
+  allProducts = JSON.parse(localStorage.getItem('allProducts'));
+  data = JSON.parse(localStorage.getItem('data'));
+} else {
+  data = {
+    labels: [],
+    datasets: [
+      {
+        label: 'My First dataset',
+        fillColor: '#2E2A26',
+        strokeColor: 'black',
+        highlightFill: 'rgba(220,220,220,0.75)',
+        highlightStroke: 'rgba(220,220,220,1)',
+        data: [],
+      },
+    ]
   };
-  if(localStorage.data && localStorage.allProducts){
-    allProducts = JSON.parse(localStorage.getItem("allProducts"));
-    data = JSON.parse(localStorage.getItem('data'));
-  } else {
-    data = {
-        labels: [],
-        datasets: [
-            {
-                label: "My First dataset",
-                fillColor: '#2E2A26',
-                strokeColor: "black",
-                highlightFill: "rgba(220,220,220,0.75)",
-                highlightStroke: "rgba(220,220,220,1)",
-                data: [],
-            },
-        ]
-    };
-    buildAlbum();
-  };
+  buildAlbum();
+}
 
 productRank.leftEl.addEventListener('click', function(){
   productRank.tallyClicks(productRank.leftEl.id);
@@ -105,14 +106,16 @@ productRank.rightEl.addEventListener('click', function(){
 });
 productRank.displayImages();
 
+var refresh = document.getElementById('refresh');
+
 resultsEl.addEventListener('click', function(){
   refresh.hidden = false;
   voteTable();
 });
 
 refresh.addEventListener('click', function(){
-    window.location.reload()
-  })
+  window.location.reload();
+});
 function voteTable(){
   var catalogVotesEl = document.getElementById('votes');
   var context = document.getElementById('popularity').getContext('2d');
