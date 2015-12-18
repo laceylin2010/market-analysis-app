@@ -7,7 +7,7 @@ img {
   display: flex;
   justify-content: center;
   border-style: outset;
-  border-color: #107A00;
+  border-color: white;
   border-width: 10px;
 
 
@@ -20,7 +20,7 @@ h1 {
 }
 
 #wrapper {
-  background-color:#93FF9B;
+  background-color:#8F2333;
   width: 75%;
   margin: auto;
 }
